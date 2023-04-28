@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // alert(document,getElementbyId('p_id').value); onload되기전에 해당 id를 가진 객체를 찾으면
+                                                        // dom객체 생성이 완료되지않아 찾지못함.
+        window.onload = function () {
+            // onload이후에는 dom객체를 찾을수 있음
+        alert(document,getElementbyId('p_id').value);
+        }
+    </script>
+</head>
+<body>
+    <input type="text" value="hi" id="p_id">
+</body>
+</html>

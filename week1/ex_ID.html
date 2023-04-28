@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ID</title>
+
+</head>
+<body>
+    <button onclick="fn_changeSize()">텍스트 크기변경 + </button>
+    <button onclick="fn_changeSize1()">텍스트 크기변경 - </button>
+    <p id="text1">이 텍스트 크기를 변경하세요!!!</p>
+
+    <button onclick="fn_visibilty()">숨기기/보이기 </button>
+    <div id="box">이 내용을 숨기거나 보이게 하세요!!!</div>
+
+    <img id="slider" src="./media/다운로드1.jpeg" width= "200px" height= 240px alt="">
+    <button onclick="fn_next()">다음이미지</button>
+    <script>
+        let size = 20;
+        function fn_changeSize(){
+            size++
+            let text = document.getElementById('text1');
+            text.style.fontSize = size + 'px';
+        
+        }
+        function fn_changeSize1() {
+            size--;
+            let text = document.getElementById('text1');
+            text.style.fontSize = size +'px';
+        }
+    function fn_visibilty() {
+        let box = document.querySelector('#box');
+                       // == 값도같고 타입도 같을때 true // 같으면 // 다르면
+        box.style.display = box.style.display == "none" ? "block" : "none";
+    }
+    // setInterval(fn_visibilty,100); 깜빡이게 하는
+
+    let images = ['./media/다운로드1.jpeg', './media/다운로드2.jpeg', './media/다운로드3.jpeg'];
+    let currentIdx = 0;
+    function fn_next() {
+        let slider = document.getElementById('slider');
+        currentIdx = (currentIdx + 1) % images.length;
+        console.log(currentIdx);
+        slider.src = images[currentIdx];
+    }
+    </script>
+</body>
+</html>
