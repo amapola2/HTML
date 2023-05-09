@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery-3.6.4.js"></script>
+    <script>
+        /* j query의 $ 라는 이름인 $인 객체
+        j query는 document element를 선택하여 작업하기때문에 
+        window onload 상태에 작동되도록 코드를 작성(아래와같이)
+        */
+        // J query 기본 사용법 1
+        $(document).ready(function name() {
+            $("h2").click(function(){  
+                $(this).hide();// 안보임
+        });
+        $("input").focus(function(){
+            $(this).css('background-color','yellow');
+        });
+        $("input").blur(function(){
+            $(this).css('background-color','white')
+        })
+        $(document).mousemove(function(e){
+            $("#log").text("e.pageX:"+ e.pageX + "e.pageY" + e.pageY)
+        })
+    });
+    // J query 기본사용법 2
+    $(function(){
+        
+    });
+    </script>
+    <title>documents</title>
+    <h2>클릭하면 사라집니다.</h2>
+</head>
+<body>
+    아이디:<input type="text">
+    비밀번호:<input type="text">
+    <p id="log"></p>
+</body>
+</html>
