@@ -6,6 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>팝업</title>
     <script>
+    function fn_check() {
+
+        let new = new Date();
+        if(document.getElementById('chb')[0].checked){
+            now.setTime(now.getTime() + (1 * 60 * 1000))
+            setcookies('pop', 'y' ,now);
+            window.close()
+
+        }else{
+            now.setTime(now.getTime() + (1 * 60 * 1000))
+        }
+        
+        })
+    }
+
     function fn_close() {
         let b = document.getElementById('btn')
         if(false)
@@ -18,6 +33,7 @@
     <h4> 공지내용입니다.....</h4>
     <hr>
     2분동안은 다시 안보기 <input type="checkbox" name="chb">
+
     <button id="btn">닫기</button>
 </body>
 </html>
