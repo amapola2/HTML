@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML Layout</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      height: 100%;
+    }
+
+    .section {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .section img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <section class="section" style="border-radius: 20px;">
+      <img src="./봄.gif" alt="봄">
+    </section>
+    <section class="section">
+      <img src="./여름.jpg" alt="여름">
+    </section>
+    <section class="section">
+      <img src="./가을.jpeg" alt="가을">
+    </section>
+    <section class="section">
+      <img src="./겨울.jpeg" alt="겨울">
+    </section>
+  </div>
+</body>
+</html>
