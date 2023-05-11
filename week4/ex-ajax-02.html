@@ -1,16 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        html,body{ margin :0; padding: 0;}
-        #left_table{ float: left; width:25%; background-color: beige;}
-        #coin_list tr:nth-child(even) {background-color: bisque;}
-        table{text-align: center;}
-        table tr:hover{ 
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #left_table {
+            float: left;
+            width: 25%;
+            background-color: beige;
+        }
+
+        #coin_list tr:nth-child(even) {
+            background-color: bisque;
+        }
+
+        table {
+            text-align: center;
+        }
+
+        table tr:hover {
             background-color: cadetblue;
         }
     </style>
@@ -18,10 +35,10 @@
         let httpRequest;
         let info_url = "https://api.upbit.com/v1/market/all";
         let details_url = "https://api.upbit.com/v1/ticker?markets=";
-    
-        function req_ajax(func, url){
+
+        function req_ajax(func, url) {
             httpRequest = new XMLHttpRequest();
-            if(!httpRequest){
+            if (!httpRequest) {
                 alert("요청이 안됨.");
                 return;
             }
@@ -30,44 +47,45 @@
             httpRequest.open('get', url);
             httpRequest.send();
         }
-    
-        function coin_info(){
-    if(httpRequest.readyState === 4 && httpRequest.status == 200){
-        console.log(httpRequest.responseText);
-        let upbit_code_list = JSON.parse(httpRequest.responseText);
-        for(let i in upbit_code_list) {
-            req_ajax(coin_detail, details_url + upbit_code_list[i].market);
+
+        function coin_info() {
+            if (httpRequest.readyState === 4 && httpRequest.status == 200) {
+                console.log(httpRequest.responseText);
+                let upbit_code_list = JSON.parse(httpRequest.responseText);
+                for (let i in upbit_code_list) {
+                    req_ajax(coin_detail, details_url + upbit_code_list[i].market);
+                }
+            }
         }
-    }
-}
-    
-        function coin_detail(){
-            if(httpRequest.readyState === 4 && httpRequest.status == 200){
+
+        function coin_detail() {
+            if (httpRequest.readyState === 4 && httpRequest.status == 200) {
                 let obj = JSON.parse(httpRequest.responseText);
                 console.log(obj);
                 console.log(obj[0]);
                 let str;
                 str = "<tr><th>항목</th><th>값</th><tr>";
-                for(let key in obj[0]) {
-                    str +="<tr>";
-                    str +="<td>" + key + "</td>";
-                    str +="<td>" + obj[0][key] + "</td>";
-                    str +="</tr>";
+                for (let key in obj[0]) {
+                    str += "<tr>";
+                    str += "<td>" + key + "</td>";
+                    str += "<td>" + obj[0][key] + "</td>";
+                    str += "</tr>";
                 }
                 document.getElementById('coin_detail').innerHTML = str;
             }
         }
-        window.onload = function() {
+        window.onload = function () {
             req_ajax(coin_info, info_url);
             // table에 click 이벤트 적용
             let table = document.getElementById('coin_list');
-            table.onclick = function(e) {
+            table.onclick = function (e) {
                 let coincode = e.target.parentElement.children[2];
                 req_ajax(coin_detail, detail_url + coincode.innerHTML);
             }
         }
     </script>
 </head>
+
 <body>
     <button type="button" onclick="coin_info()">가져오기</button>
     <div class="row">
@@ -77,4 +95,5 @@
         <div id="right_table"></div>
     </div>
 </body>
+
 </html>
