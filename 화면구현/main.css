@@ -6,8 +6,8 @@ html, body {
   header {
     height: 75px;
     padding: 1rem;
-    color: blanchedalmond;
-    background: gainsboro;
+    color: black;
+    background: white;
     font-weight: bold;
     display: flex;
     justify-content: space-between;
@@ -16,7 +16,7 @@ html, body {
   
   header span {
     flex-grow: 1;
-    margin: 0 300px;
+    margin: 0 250px;
   }
   
   header .search-container {
@@ -34,6 +34,10 @@ html, body {
   .section {
     position: relative;
     overflow: hidden;
+  }
+  .item{
+    flex: 1;
+    border:1px;
   }
 
   .section img {

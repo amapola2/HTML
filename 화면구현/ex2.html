@@ -1,15 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HTML Layout</title>
-  <link href="main.css" rel="stylesheet" type="text/css" />
-  
+  <link href="main2.css" rel="stylesheet" type="text/css" />
 </head>
+<script>
+    // 스크롤 이벤트 핸들러
+function handleScroll() {
+  const items = document.querySelectorAll('.item');
+
+  items.forEach((item) => {
+    const itemPosition = item.getBoundingClientRect().top;
+    const windowHeight = window.innerHeight;
+
+    // item이 화면의 2/3 이상 들어올 때 특정 클래스 추가
+    if (itemPosition - windowHeight <= -windowHeight / 3) {
+      item.classList.add('slide-in');
+    } else {
+      item.classList.remove('slide-in');
+    }
+  });
+}
+
+// 스크롤 이벤트 리스너 등록
+window.addEventListener('scroll', handleScroll);
+</script>
 <body>
   <header>
-    <h1>놀자 </h1>
+    <h1>놀자</h1>
     <nav>
       <span>봄</span>
       <span>여름</span>
@@ -23,21 +44,25 @@
       </form>
     </div>
   </header>
-  
 
   <div class="container">
-    <section class ="item">
+    <section class="item">
       <img src="./봄.jpg" alt="">
+      <h3> 야 뭐해 </h3>
     </section>
-    <section class ="item">
+    <section class="item">
       <img src="./여름바다.jpg" alt="">
+      <h3> 야 나와 </h3>
     </section>
-    <section class ="item">
+    <section class="item">
       <img src="./가을.jpg" alt="">
+      <h3> 야 놀자 </h3>
     </section>
-    <section class ="item">
+    <section class="item">
       <img src="./겨울.jpg" alt="">
+      <h3> 드라이브 가자 </h3>
     </section>
+
     <section class="section" style="border-radius: 20px;">
       <img src="./봄1.gif" alt="봄">
     </section>
@@ -50,9 +75,8 @@
     <section class="section">
       <img src="./겨울.gif" alt="겨울">
     </section>
-
-    <div class="color"></div>
   </div>
-</header>
+
 </body>
+
 </html>
