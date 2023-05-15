@@ -4,31 +4,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HTML Layout</title>
+  <title>봄 여름 가을 겨울</title>
   <link href="main2.css" rel="stylesheet" type="text/css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&display=swap" rel="stylesheet">
 </head>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fb6e0f4cad76e838c2a6055c0445b186"></script>
 <script>
-    // 스크롤 이벤트 핸들러
-function handleScroll() {
-  const items = document.querySelectorAll('.item');
+  // 스크롤 이벤트 핸들러
+  function handleScroll() {
+    const items = document.querySelectorAll('.item');
+  // 오동도 위치 좌표
+  var destination = new kakao.maps.LatLng(34.744444890552, 127.76759834457);
+    items.forEach((item) => {
+      const itemPosition = item.getBoundingClientRect().top;
+      const windowHeight = window.innerHeight;
 
-  items.forEach((item) => {
-    const itemPosition = item.getBoundingClientRect().top;
-    const windowHeight = window.innerHeight;
-
-    // item이 화면의 2/3 이상 들어올 때 특정 클래스 추가
-    if (itemPosition - windowHeight <= -windowHeight / 3) {
-      item.classList.add('slide-in');
-    } else {
-      item.classList.remove('slide-in');
-    }
-  });
-}
-
-// 스크롤 이벤트 리스너 등록
-window.addEventListener('scroll', handleScroll);
+      // item이 화면의 2/3 이상 들어올 때 특정 클래스 추가
+      if (itemPosition - windowHeight <= -windowHeight / 3) {
+        item.classList.add('slide-in');
+      } else {
+        item.classList.remove('slide-in');
+      }
+    });
+  }
+  
+  // 스크롤 이벤트 리스너 등록
+  window.addEventListener('scroll', handleScroll);
 </script>
+
 <body>
+
   <header>
     <h1>놀자</h1>
     <nav>
@@ -44,25 +51,26 @@ window.addEventListener('scroll', handleScroll);
       </form>
     </div>
   </header>
-
+  <div id="map" style="width:100%;height:350px;"></div>
   <div class="container">
     <section class="item">
       <img src="./봄.jpg" alt="">
-      <h3> 야 뭐해 </h3>
+      <h3> 야 놀자 </h3>
     </section>
     <section class="item">
       <img src="./여름바다.jpg" alt="">
-      <h3> 야 나와 </h3>
+      <h3> 뭐해 </h3>
     </section>
     <section class="item">
       <img src="./가을.jpg" alt="">
-      <h3> 야 놀자 </h3>
+      <h3> 나와 </h3>
     </section>
     <section class="item">
       <img src="./겨울.jpg" alt="">
       <h3> 드라이브 가자 </h3>
     </section>
-
+    </div>
+    <div class="container1">
     <section class="section" style="border-radius: 20px;">
       <img src="./봄1.gif" alt="봄">
     </section>
@@ -76,7 +84,51 @@ window.addEventListener('scroll', handleScroll);
       <img src="./겨울.gif" alt="겨울">
     </section>
   </div>
+  <script>
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+      mapOption = {
+        center: new kakao.maps.LatLng(34.744621798764, 	127.74616740886), // 지도의 중심좌표
+        level: 4 // 지도의 확대 레벨
+      };
 
+    var map = new kakao.maps.Map(mapContainer, mapOption);
+
+    imageSrc = "./동백꽃.jpg"; // 마커이미지의 주소입니다    
+      imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
+      imageOption = { offset: new kakao.maps.Point(27, 69) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+
+    // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
+      markerPosition = new kakao.maps.LatLng(34.744444890552, 127.76759834457); // 마커가 표시될 위치입니다
+
+    // 마커를 생성합니다
+    var marker = new kakao.maps.Marker({
+      position: markerPosition,
+      image: markerImage // 마커이미지 설정 
+    });
+
+    // 마커가 지도 위에 표시되도록 설정합니다
+    marker.setMap(map);
+
+    // 커스텀 오버레이에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+    var content = '<div class="customoverlay">' +
+      '  <a href="https://map.kakao.com/link/map/8483282" target="_blank">' +
+      '    <span class="title">여수 오동도</span>' +
+      '  </a>' +
+      '</div>';
+
+    // 커스텀 오버레이가 표시될 위치입니다 
+    var position = new kakao.maps.LatLng(34.744444890552, 127.76759834457);
+
+    // 커스텀 오버레이를 생성합니다
+    var customOverlay = new kakao.maps.CustomOverlay({
+      map: map,
+      position: position,
+      content: content,
+      yAnchor: 1
+    });
+
+  </script>
 </body>
 
 </html>
